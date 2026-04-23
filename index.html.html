@@ -1,0 +1,806 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRIO-Oklahoma | Transplant Recipients International Organization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'trio-primary': '#1e3a5f',
+                        'trio-secondary': '#2d5a87',
+                        'trio-accent': '#e67e22',
+                        'trio-light': '#f8fafc',
+                        'trio-green': '#27ae60',
+                        'trio-teal': '#16a085',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .hero-gradient { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #16a085 100%); }
+        .glass-card { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .section-fade { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .section-fade.visible { opacity: 1; transform: translateY(0); }
+        .stat-counter { font-variant-numeric: tabular-nums; }
+        .nav-blur { backdrop-filter: blur(20px); background: rgba(255,255,255,0.9); }
+        .quote-mark { font-size: 4rem; line-height: 0; color: #e67e22; opacity: 0.3; }
+        .team-tornado { 
+            background: linear-gradient(45deg, #87CEEB 0%, #98FB98 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .float-animation { animation: float 6s ease-in-out infinite; }
+        .donate-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(230, 126, 34, 0); }
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-trio-light">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur border-b border-gray-200/50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-trio-primary rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        <i class="fas fa-heart-pulse"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-trio-primary tracking-tight">TRIO-Oklahoma</h1>
+                        <p class="text-xs text-trio-secondary font-medium">Transplant Recipients International Org</p>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-700 hover:text-trio-primary font-medium transition-colors">About</a>
+                    <a href="#team-oklahoma" class="text-gray-700 hover:text-trio-primary font-medium transition-colors">Team Oklahoma</a>
+                    <a href="#support" class="text-gray-700 hover:text-trio-primary font-medium transition-colors">Support</a>
+                    <a href="#survey" class="text-gray-700 hover:text-trio-primary font-medium transition-colors">Research</a>
+                    <a href="#blog" class="text-gray-700 hover:text-trio-primary font-medium transition-colors">Stories</a>
+                    <a href="#donate" class="bg-trio-accent text-white px-6 py-2.5 rounded-full font-semibold hover:bg-orange-600 transition-all donate-pulse">
+                        <i class="fas fa-heart mr-2"></i>Donate
+                    </a>
+                </div>
+
+                <button class="md:hidden text-gray-700 text-2xl" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#about" class="block py-2 text-gray-700 font-medium">About</a>
+                <a href="#team-oklahoma" class="block py-2 text-gray-700 font-medium">Team Oklahoma</a>
+                <a href="#support" class="block py-2 text-gray-700 font-medium">Support</a>
+                <a href="#survey" class="block py-2 text-gray-700 font-medium">Research</a>
+                <a href="#blog" class="block py-2 text-gray-700 font-medium">Stories</a>
+                <a href="#donate" class="block py-2 text-trio-accent font-bold">Donate Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center hero-gradient overflow-hidden pt-20">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-trio-teal rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white space-y-8">
+                    <div class="inline-flex items-center px-4 py-2 bg-white/10 rounded-full text-sm font-medium backdrop-blur-sm border border-white/20">
+                        <i class="fas fa-star text-yellow-400 mr-2"></i>
+                        501(c)(3) Non-Profit Organization
+                    </div>
+
+                    <h1 class="text-5xl lg:text-7xl font-serif font-bold leading-tight">
+                        Connecting the <span class="text-trio-accent">Transplant</span> Community
+                    </h1>
+
+                    <p class="text-xl text-gray-200 leading-relaxed max-w-xl">
+                        Empowering pre and post-transplant patients and their families across Oklahoma through peer support, education, and advocacy since 2020.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#about" class="bg-white text-trio-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all shadow-xl">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#team-oklahoma" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all">
+                            Join Team Oklahoma
+                        </a>
+                    </div>
+
+                    <div class="flex items-center space-x-8 pt-4">
+                        <div>
+                            <div class="text-3xl font-bold text-trio-accent">2020</div>
+                            <div class="text-sm text-gray-300">Founded</div>
+                        </div>
+                        <div class="h-12 w-px bg-white/20"></div>
+                        <div>
+                            <div class="text-3xl font-bold text-trio-accent">10+</div>
+                            <div class="text-sm text-gray-300">States with Chapters</div>
+                        </div>
+                        <div class="h-12 w-px bg-white/20"></div>
+                        <div>
+                            <div class="text-3xl font-bold text-trio-accent">UNOS</div>
+                            <div class="text-sm text-gray-300">Voting Member</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative hidden lg:block">
+                    <div class="relative float-animation">
+                        <div class="glass-card rounded-3xl p-8 shadow-2xl max-w-md ml-auto">
+                            <div class="flex items-start space-x-4 mb-6">
+                                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=100&h=100&fit=crop" alt="Community" class="w-16 h-16 rounded-2xl object-cover shadow-lg">
+                                <div>
+                                    <h3 class="font-bold text-trio-primary text-lg">Peer Support Group</h3>
+                                    <p class="text-gray-500 text-sm">Every 2nd Saturday</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 italic mb-4">"The final stage of healing is using what happens to you to help others."</p>
+                            <p class="text-right text-sm font-semibold text-trio-secondary">— Gloria Steinem</p>
+                            <div class="mt-6 pt-6 border-t border-gray-100">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-gray-500">Next Meeting</span>
+                                    <span class="bg-trio-green/10 text-trio-green px-3 py-1 rounded-full text-sm font-semibold">May 10, 2026</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute -bottom-8 -left-8 glass-card rounded-2xl p-4 shadow-xl max-w-xs">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-trio-accent/10 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-hand-holding-heart text-trio-accent"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-trio-primary">Donor Registration</p>
+                                    <p class="text-xs text-gray-500">Register to be an organ donor</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-trio-light to-transparent"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6 section-fade">
+                    <div class="inline-flex items-center px-4 py-2 bg-trio-primary/5 rounded-full text-trio-primary text-sm font-semibold">
+                        <i class="fas fa-info-circle mr-2"></i> About TRIO
+                    </div>
+
+                    <h2 class="text-4xl lg:text-5xl font-serif font-bold text-trio-primary">
+                        A Legacy of Support Since 1987
+                    </h2>
+
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        TRIO (Transplant Recipients International Organization) was established in the mid-1980s by a group of transplant patients at the University of Pittsburgh Medical Center. Incorporated as a not-for-profit in 1987, TRIO became an international organization in 1994, moving its headquarters to Washington D.C.
+                    </p>
+
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        TRIO-Oklahoma was founded in 2020 by <strong>Lorrinda Gray-Davis</strong>, who serves as its first President. We are a 501(c)(3) non-profit membership organization working to improve the quality of life for transplant recipients, candidates, donor families, and healthcare professionals.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="bg-trio-light p-4 rounded-xl border border-gray-100">
+                            <i class="fas fa-users text-2xl text-trio-secondary mb-2"></i>
+                            <h4 class="font-bold text-trio-primary">Peer Support</h4>
+                            <p class="text-sm text-gray-500">Sharing personal experiences to complement professional counseling</p>
+                        </div>
+                        <div class="bg-trio-light p-4 rounded-xl border border-gray-100">
+                            <i class="fas fa-landmark text-2xl text-trio-secondary mb-2"></i>
+                            <h4 class="font-bold text-trio-primary">National Recognition</h4>
+                            <p class="text-sm text-gray-500">Recognized by HHS as the voice for transplant candidates and recipients</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative section-fade">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4 mt-8">
+                            <div class="bg-trio-primary rounded-2xl p-6 text-white shadow-lg">
+                                <i class="fas fa-heart text-3xl text-trio-accent mb-3"></i>
+                                <h3 class="font-bold text-xl mb-2">Our Mission</h3>
+                                <p class="text-sm text-gray-300">Improve quality of life for transplant recipients and their families through support and education.</p>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=300&fit=crop" alt="Healthcare" class="rounded-2xl shadow-lg object-cover h-48 w-full">
+                        </div>
+                        <div class="space-y-4">
+                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop" alt="Community" class="rounded-2xl shadow-lg object-cover h-48 w-full">
+                            <div class="bg-trio-accent rounded-2xl p-6 text-white shadow-lg">
+                                <i class="fas fa-globe text-3xl mb-3"></i>
+                                <h3 class="font-bold text-xl mb-2">International Reach</h3>
+                                <p class="text-sm text-white/90">Chapters across the US and an international chapter in Japan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Oklahoma Section -->
+    <section id="team-oklahoma" class="py-24 bg-trio-light relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-trio-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 section-fade">
+                <div class="inline-flex items-center px-4 py-2 bg-trio-accent/10 rounded-full text-trio-accent text-sm font-semibold mb-4">
+                    <i class="fas fa-trophy mr-2"></i> Transplant Games of America
+                </div>
+                <h2 class="text-4xl lg:text-6xl font-serif font-bold text-trio-primary mb-4">
+                    Team Oklahoma
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Demonstrating the success of organ, eye and tissue donation through athletic competition and community.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6 section-fade">
+                    <div class="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+                        <div class="flex items-center space-x-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-300 to-green-300 rounded-2xl flex items-center justify-center shadow-lg">
+                                <i class="fas fa-wind text-3xl text-trio-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-trio-primary">Mission Statement</h3>
+                                <p class="text-trio-secondary">Team Oklahoma 2024</p>
+                            </div>
+                        </div>
+
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            Team Oklahoma's mission is to demonstrate the success of organ, eye and tissue donation. We serve as a family, to our members, by providing love, support and understanding. We strive to honor the memory of our donors and show gratitude to their family for the gifts given.
+                        </p>
+
+                        <div class="bg-trio-light rounded-xl p-6 border-l-4 border-trio-accent">
+                            <p class="text-gray-600 italic">
+                                Be part of the Transplant Games of America, a multi-sport festival event for individuals who have undergone life-saving transplant surgeries.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover-lift">
+                            <i class="fas fa-running text-3xl text-trio-teal mb-4"></i>
+                            <h4 class="font-bold text-trio-primary text-lg mb-2">Multi-Sport Events</h4>
+                            <p class="text-gray-600 text-sm">From 5K runs to volleyball, poker to table tennis — events for all athletic levels.</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover-lift">
+                            <i class="fas fa-handshake text-3xl text-trio-teal mb-4"></i>
+                            <h4 class="font-bold text-trio-primary text-lg mb-2">Open to All</h4>
+                            <p class="text-gray-600 text-sm">Living donors, organ recipients, bone marrow, corneal and tissue transplant recipients welcome.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6 section-fade">
+                    <div class="bg-trio-primary rounded-3xl p-8 text-white shadow-xl">
+                        <h3 class="text-2xl font-bold mb-6">Team Managers</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4 bg-white/10 rounded-xl p-4">
+                                <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Mike McCellin</p>
+                                    <p class="text-sm text-gray-300">Co-Manager</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 bg-white/10 rounded-xl p-4">
+                                <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Cheryl Manley</p>
+                                    <p class="text-sm text-gray-300">Co-Manager</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-white/20">
+                            <a href="#" class="flex items-center justify-center w-full bg-trio-accent text-white py-3 rounded-xl font-bold hover:bg-orange-600 transition-all">
+                                <i class="fab fa-facebook mr-2"></i> Follow Team Oklahoma
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center">
+                        <i class="fas fa-medal text-4xl text-yellow-500 mb-3"></i>
+                        <h4 class="font-bold text-trio-primary text-lg">Transplant Games</h4>
+                        <p class="text-gray-600 text-sm mt-2">Celebrating lives of organ donors and recipients while increasing donation awareness.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Groups Section -->
+    <section id="support" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-fade">
+                <div class="inline-flex items-center px-4 py-2 bg-trio-green/10 rounded-full text-trio-green text-sm font-semibold mb-4">
+                    <i class="fas fa-hands-helping mr-2"></i> Peer-to-Peer Support
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-serif font-bold text-trio-primary mb-4">
+                    You Are Not Alone
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Transplant recipients and those waiting can have a variety of needs. Our community is here to help.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-trio-light rounded-3xl p-8 border border-gray-100 hover-lift section-fade">
+                    <div class="w-14 h-14 bg-trio-primary/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-comments text-2xl text-trio-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-trio-primary mb-3">Support Groups</h3>
+                    <p class="text-gray-600 mb-6">Regular meetings for pre and post-transplant patients to share experiences and find encouragement.</p>
+                    <div class="flex items-center text-trio-secondary font-semibold text-sm">
+                        <i class="fas fa-calendar-alt mr-2"></i> 2nd Saturday of each month
+                    </div>
+                </div>
+
+                <div class="bg-trio-light rounded-3xl p-8 border border-gray-100 hover-lift section-fade">
+                    <div class="w-14 h-14 bg-trio-accent/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-book-medical text-2xl text-trio-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-trio-primary mb-3">Information Kits</h3>
+                    <p class="text-gray-600 mb-6">Request a free TRIO information kit containing everything you need to know about our organization.</p>
+                    <button class="text-trio-accent font-semibold text-sm hover:underline">
+                        Request Free Kit <i class="fas fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+
+                <div class="bg-trio-light rounded-3xl p-8 border border-gray-100 hover-lift section-fade">
+                    <div class="w-14 h-14 bg-trio-teal/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-user-md text-2xl text-trio-teal"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-trio-primary mb-3">Professional Network</h3>
+                    <p class="text-gray-600 mb-6">Complementing healthcare professional counseling with real-world peer experiences and guidance.</p>
+                    <div class="flex items-center text-trio-teal font-semibold text-sm">
+                        <i class="fas fa-check-circle mr-2"></i> Healthcare professional endorsed
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-gradient-to-r from-trio-primary to-trio-secondary rounded-3xl p-8 lg:p-12 text-white shadow-2xl section-fade">
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-3xl font-serif font-bold mb-4">Join Our Community</h3>
+                        <p class="text-gray-200 text-lg mb-6">
+                            Membership is open to transplant recipients, candidates, donor families, and anyone interested in supporting the transplant community.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <button class="bg-white text-trio-primary px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition-all">
+                                Become a Member
+                            </button>
+                            <button class="border-2 border-white text-white px-6 py-3 rounded-full font-bold hover:bg-white/10 transition-all">
+                                Contact Us
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                            <div class="text-center">
+                                <i class="fas fa-envelope text-4xl text-trio-accent mb-3"></i>
+                                <p class="font-semibold">ldavis@trio-oklahoma.org</p>
+                                <p class="text-sm text-gray-300 mt-1">President: Lorrinda Gray-Davis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patient Survey Section -->
+    <section id="survey" class="py-24 bg-trio-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="section-fade">
+                    <div class="inline-flex items-center px-4 py-2 bg-trio-secondary/10 rounded-full text-trio-secondary text-sm font-semibold mb-4">
+                        <i class="fas fa-chart-bar mr-2"></i> Research & Data
+                    </div>
+                    <h2 class="text-4xl lg:text-5xl font-serif font-bold text-trio-primary mb-6">
+                        Patient Survey Results 2023
+                    </h2>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        TRIO-Oklahoma conducted a comprehensive patient survey to better understand the needs and experiences of the transplant community in Oklahoma. The final report provides valuable insights for improving care and support services.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                            <div class="w-12 h-12 bg-trio-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-clipboard-list text-trio-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-trio-primary">Final Report Available</h4>
+                                <p class="text-sm text-gray-500">Comprehensive analysis of patient needs and outcomes</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                            <div class="w-12 h-12 bg-trio-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-lightbulb text-trio-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-trio-primary">Data-Driven Improvements</h4>
+                                <p class="text-sm text-gray-500">Using results to enhance support programs</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="mt-8 bg-trio-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-trio-secondary transition-all shadow-lg">
+                        <i class="fas fa-download mr-2"></i> View Full Report
+                    </button>
+                </div>
+
+                <div class="relative section-fade">
+                    <div class="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
+                        <h3 class="text-2xl font-bold text-trio-primary mb-8 text-center">Survey Highlights</h3>
+
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-semibold text-gray-700">Patient Satisfaction</span>
+                                    <span class="font-bold text-trio-primary">87%</span>
+                                </div>
+                                <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-trio-primary rounded-full" style="width: 87%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-semibold text-gray-700">Peer Support Value</span>
+                                    <span class="font-bold text-trio-secondary">92%</span>
+                                </div>
+                                <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-trio-secondary rounded-full" style="width: 92%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-semibold text-gray-700">Information Accessibility</span>
+                                    <span class="font-bold text-trio-teal">78%</span>
+                                </div>
+                                <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-trio-teal rounded-full" style="width: 78%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-semibold text-gray-700">Would Recommend TRIO</span>
+                                    <span class="font-bold text-trio-accent">95%</span>
+                                </div>
+                                <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-trio-accent rounded-full" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-gray-100 text-center">
+                            <p class="text-sm text-gray-500">Based on 2023 TRIO-Oklahoma Patient Survey</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog/Stories Section -->
+    <section id="blog" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-fade">
+                <div class="inline-flex items-center px-4 py-2 bg-trio-primary/5 rounded-full text-trio-primary text-sm font-semibold mb-4">
+                    <i class="fas fa-pen-nib mr-2"></i> Stories & Articles
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-serif font-bold text-trio-primary mb-4">
+                    Featured Stories
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Real experiences from our transplant community. Stories of hope, resilience, and new beginnings.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <article class="bg-trio-light rounded-3xl overflow-hidden border border-gray-100 hover-lift section-fade">
+                    <div class="h-48 bg-gradient-to-br from-trio-primary to-trio-secondary flex items-center justify-center">
+                        <i class="fas fa-question text-6xl text-white/30"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center space-x-2 text-sm text-gray-500 mb-3">
+                            <i class="fas fa-calendar"></i>
+                            <span>Featured Post</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-trio-primary mb-3">What If?</h3>
+                        <p class="text-gray-600 mb-4">
+                            As a pre-transplant patient, I felt overwhelmed by the power of the words "What if" — a reflection on facing the unknown with courage.
+                        </p>
+                        <a href="#" class="inline-flex items-center text-trio-secondary font-semibold hover:text-trio-primary transition-colors">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="bg-trio-light rounded-3xl overflow-hidden border border-gray-100 hover-lift section-fade">
+                    <div class="h-48 bg-gradient-to-br from-trio-accent to-orange-400 flex items-center justify-center">
+                        <i class="fas fa-heart text-6xl text-white/30"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center space-x-2 text-sm text-gray-500 mb-3">
+                            <i class="fas fa-calendar"></i>
+                            <span>Transplant Living</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-trio-primary mb-3">Life After Transplant</h3>
+                        <p class="text-gray-600 mb-4">
+                            Navigating the new normal: tips, resources, and community support for thriving in your post-transplant journey.
+                        </p>
+                        <a href="#" class="inline-flex items-center text-trio-secondary font-semibold hover:text-trio-primary transition-colors">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="bg-trio-light rounded-3xl overflow-hidden border border-gray-100 hover-lift section-fade">
+                    <div class="h-48 bg-gradient-to-br from-trio-teal to-trio-green flex items-center justify-center">
+                        <i class="fas fa-users text-6xl text-white/30"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center space-x-2 text-sm text-gray-500 mb-3">
+                            <i class="fas fa-calendar"></i>
+                            <span>Community</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-trio-primary mb-3">Finding Your Tribe</h3>
+                        <p class="text-gray-600 mb-4">
+                            The importance of peer support: how connecting with others who understand can make all the difference in recovery.
+                        </p>
+                        <a href="#" class="inline-flex items-center text-trio-secondary font-semibold hover:text-trio-primary transition-colors">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnerships Section -->
+    <section class="py-24 bg-trio-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-fade">
+                <h2 class="text-3xl font-serif font-bold text-trio-primary mb-4">Professional Affiliations</h2>
+                <p class="text-gray-600">Proudly partnered with leading organizations in transplantation</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center section-fade">
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 w-full text-center hover-lift">
+                    <i class="fas fa-hospital text-4xl text-trio-primary mb-3"></i>
+                    <p class="font-bold text-trio-primary text-sm">OU Health</p>
+                    <p class="text-xs text-gray-500">Transplant Services</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 w-full text-center hover-lift">
+                    <i class="fas fa-globe-americas text-4xl text-trio-secondary mb-3"></i>
+                    <p class="font-bold text-trio-primary text-sm">TRIO National</p>
+                    <p class="text-xs text-gray-500">International Organization</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 w-full text-center hover-lift">
+                    <i class="fas fa-network-wired text-4xl text-trio-teal mb-3"></i>
+                    <p class="font-bold text-trio-primary text-sm">OPTN/UNOS</p>
+                    <p class="text-xs text-gray-500">Voting Member</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 w-full text-center hover-lift">
+                    <i class="fas fa-landmark text-4xl text-trio-accent mb-3"></i>
+                    <p class="font-bold text-trio-primary text-sm">HHS</p>
+                    <p class="text-xs text-gray-500">Recognized Organization</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donate CTA Section -->
+    <section id="donate" class="py-24 bg-trio-primary relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-1/4 w-72 h-72 bg-trio-accent rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-trio-teal rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 section-fade">
+            <i class="fas fa-heart text-6xl text-trio-accent mb-6 animate-pulse"></i>
+            <h2 class="text-4xl lg:text-6xl font-serif font-bold text-white mb-6">
+                Support Our Mission
+            </h2>
+            <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                Every dollar counts. Your generous donations help us provide financial resources, educational materials, and vital support services for transplant patients and their families across Oklahoma.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <button class="bg-trio-accent text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-orange-600 transition-all shadow-xl donate-pulse">
+                    <i class="fas fa-heart mr-2"></i> Donate Now
+                </button>
+                <button class="border-2 border-white text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-white/10 transition-all">
+                    <i class="fas fa-hand-holding-heart mr-2"></i> Other Ways to Give
+                </button>
+            </div>
+
+            <div class="grid grid-cols-3 gap-8 max-w-lg mx-auto">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-trio-accent">$25</div>
+                    <div class="text-sm text-gray-400">Info Kit Sponsor</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-trio-accent">$100</div>
+                    <div class="text-sm text-gray-400">Support Group Fund</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-trio-accent">$250</div>
+                    <div class="text-sm text-gray-400">Team Oklahoma Sponsor</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-trio-primary rounded-lg flex items-center justify-center text-white">
+                            <i class="fas fa-heart-pulse"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">TRIO-Oklahoma</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        A 501(c)(3) non-profit membership organization serving the transplant community of Oklahoma.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#team-oklahoma" class="hover:text-white transition-colors">Team Oklahoma</a></li>
+                        <li><a href="#support" class="hover:text-white transition-colors">Support Groups</a></li>
+                        <li><a href="#survey" class="hover:text-white transition-colors">Patient Survey</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Resources</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Request Information Kit</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Register as Donor</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Transplant Living</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog & Articles</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Contact</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-trio-accent"></i>
+                            <span>ldavis@trio-oklahoma.org</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-user text-trio-accent"></i>
+                            <span>Lorrinda Gray-Davis, President</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-map-marker-alt text-trio-accent"></i>
+                            <span>Oklahoma, USA</span>
+                        </li>
+                    </ul>
+
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-trio-primary transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-trio-primary transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-trio-primary transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm">
+                    © 2026 TRIO-Oklahoma. All rights reserved. A chapter of Transplant Recipients International Organization.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0 text-sm text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition-colors">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-fade').forEach((el) => observer.observe(el));
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
