@@ -783,3 +783,22 @@ ul { list-style: none; padding: 0; margin: 0; }
 .forms-pay p { color: var(--color-muted); max-width: 32rem; margin: 0 auto; line-height: 1.6; }
 .forms-pay .join-fine-print { margin: 0; }
 .legend-note { margin-left: auto; font-size: 0.75rem; font-weight: 600; color: var(--color-muted-light); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* Donate tiers as PayPal links (amount pre-filled) */
+.donate-tiers--4 { grid-template-columns: repeat(2, 1fr); max-width: 44rem; gap: 1rem; }
+@media (min-width: 768px) { .donate-tiers--4 { grid-template-columns: repeat(4, 1fr); } }
+.donate-tiers .tier {
+    display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+    padding: 1.25rem 1rem; border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.2s, background 0.2s, border-color 0.2s;
+}
+.donate-tiers .tier:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.35); }
+.donate-tiers .tier--membership { background: rgba(230, 126, 34, 0.18); border-color: rgba(230, 126, 34, 0.6); }
+.donate-tiers .tier--membership:hover { background: rgba(230, 126, 34, 0.28); }
+.donate-tiers .tier--membership small { color: rgba(255, 255, 255, 0.85); }
+.tier-tag {
+    margin-top: 0.5rem; font-size: 0.75rem; font-weight: 700; color: #fff;
+    background: var(--color-accent); padding: 0.25rem 0.6rem; border-radius: var(--radius-full);
+    display: inline-flex; align-items: center; gap: 0.35rem;
+}
