@@ -49,20 +49,17 @@ Then open the **...** menu (top right) → **Settings**:
 - **Get email notification of each response**: turn on. This alone emails the
   form owner; section 3 sends a nicer email to connect@trio-oklahoma.org.
 
-## 2. Put the form on the website
+## 2. The form on the website
 
-1. In Forms click **Collect responses** (or **Share**) → the **Embed** tab (`< >`).
-2. Copy the embed code. Inside it is a link that starts with
-   `https://forms.office.com/Pages/ResponsePage.aspx?id=` and ends with `&embed=true`.
-   Copy just that link.
-3. Open `membership.js` in this repository and paste it into `formsEmbedUrl`:
+The Join page embeds the TRIO-Oklahoma Membership form:
 
-   ```js
-   formsEmbedUrl: 'https://forms.office.com/Pages/ResponsePage.aspx?id=...&embed=true',
-   ```
+```
+https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4JDjAiacvEe1mMoOeMQMWabvG_hxnn5JjTezkFmwYwNUNEdVMlBQVjI0QVIyTVc0VDNVWkFMQ1ZBTi4u
+```
 
-4. Commit and publish. The Join page now shows the Microsoft Form as Step 1 and
-   the PayPal button as Step 2.
+That link, with `&embed=true` added, is stored in `formsEmbedUrl` in `membership.js`.
+If you ever replace the form, paste the new form's link there (keep `&embed=true`
+on the end), commit, and publish.
 
 ## 3. The membership log (Excel) and the new-member email
 

@@ -4,11 +4,11 @@
    ========================================= */
 
 const MEMBERSHIP_CONFIG = {
-    // Microsoft Forms embed link (Share -> Embed -> copy the src URL, which ends
-    // in "&embed=true"). When set, the Microsoft Form is shown in place of the
-    // built-in form and every response lands in the Excel workbook in
-    // TRIO-Oklahoma's OneDrive. See MEMBERSHIP-SETUP.md.
-    formsEmbedUrl: '',
+    // Microsoft Forms link for the TRIO-Oklahoma Membership form, with
+    // "&embed=true" added so it fits inside the page. Every response lands in
+    // the Excel workbook in TRIO-Oklahoma's OneDrive. Leave empty to use the
+    // built-in form instead. See MEMBERSHIP-SETUP.md.
+    formsEmbedUrl: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4JDjAiacvEe1mMoOeMQMWabvG_hxnn5JjTezkFmwYwNUNEdVMlBQVjI0QVIyTVc0VDNVWkFMQ1ZBTi4u&embed=true',
 
     // Only used when formsEmbedUrl is empty: a URL that the built-in form
     // POSTs each member to (for example a Power Automate HTTP trigger).
