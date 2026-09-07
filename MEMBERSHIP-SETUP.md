@@ -35,8 +35,8 @@ Add these questions, in this order. Mark each one Required unless noted.
 | 8 | Phone | Text | |
 | 9 | I am joining as | Choice | Recipient, Waiting, Listed, Carepartner, Living Donor, Donor Family |
 | 10 | Have you received a transplant? | Choice | Yes, No. Use **Add branching** so Yes goes to question 11 and No skips to question 14 |
-| 11 | Transplant date | Date | |
-| 12 | Transplant hospital | Text | |
+| 11 | Transplant date | Date | Optional |
+| 12 | Transplant hospital | Text | Optional |
 | 13 | Organ(s) transplanted | Text | Optional |
 | 14 | Comments: anything you would like us to know? | Text, long answer | **Not required.** Leave the Required toggle off |
 

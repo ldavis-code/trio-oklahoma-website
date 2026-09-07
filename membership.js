@@ -72,8 +72,6 @@ const MEMBERSHIP_CONFIG = {
         radio.addEventListener('change', () => {
             const yes = form.transplanted.value === 'Yes';
             details.hidden = !yes;
-            dateInput.required = yes;
-            hospitalInput.required = yes;
             if (!yes) { dateInput.value = ''; hospitalInput.value = ''; }
         });
     });
@@ -122,9 +120,6 @@ const MEMBERSHIP_CONFIG = {
         }
         if (!data.memberType) return 'Please tell us how you are joining (Recipient, Waiting, Listed, Carepartner, Living Donor, or Donor Family).';
         if (!data.transplanted) return 'Please tell us whether you have received a transplant.';
-        if (data.transplanted === 'Yes' && (!data.transplantDate || !data.transplantHospital)) {
-            return 'Please enter your transplant date and transplant hospital.';
-        }
         return '';
     }
 
