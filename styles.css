@@ -802,3 +802,5 @@ ul { list-style: none; padding: 0; margin: 0; }
     background: var(--color-accent); padding: 0.25rem 0.6rem; border-radius: var(--radius-full);
     display: inline-flex; align-items: center; gap: 0.35rem;
 }
+.paypal-button { width: 100%; max-width: 22rem; }
+.paypal-button[hidden] { display: none; }

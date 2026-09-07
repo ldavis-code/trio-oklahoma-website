@@ -15,10 +15,16 @@ const MEMBERSHIP_CONFIG = {
     // Leave empty to fall back to an email link.
     logEndpoint: '',
 
-    // PayPal link for the $20 dues. This uses the chapter's existing PayPal
-    // button with the amount pre-filled at $20. Replace with a dedicated
-    // "Buy Now" button link if you create one (see MEMBERSHIP-SETUP.md).
-    paypalUrl: 'https://www.paypal.com/donate/?hosted_button_id=P6LXMA3R5N5AC&amount=20.00&currency_code=USD',
+    // PayPal hosted button for the $20 membership dues (created in PayPal as
+    // "Membership"). Its ID doubles as a direct payment link.
+    paypalHostedButtonId: 'YP6CEUXRC2M94',
+    paypalUrl: 'https://www.paypal.com/ncp/payment/YP6CEUXRC2M94',
+
+    // PayPal JavaScript SDK client ID. PayPal's button code starts with
+    // <script src="https://www.paypal.com/sdk/js?client-id=XXXX&components=hosted-buttons...">
+    // Paste the client-id value here and the real PayPal button renders in
+    // Step 2. Leave empty and Step 2 shows a link button to the same page.
+    paypalClientId: 'BAA1OSOsJmlrXfwxxwZi3k-9GzInXmo7peXzjsLA3dto5_tJNVYj2X6jGps3kzbG42KCi-ylk_VIwyIk8I',
 
     duesAmount: 20,
     contactEmail: 'connect@trio-oklahoma.org',
@@ -57,6 +63,7 @@ const MEMBERSHIP_CONFIG = {
         document.getElementById('paypal-pay-link-embed').href = MEMBERSHIP_CONFIG.paypalUrl;
         form.hidden = true;
         embed.hidden = false;
+        renderPayPalButton('paypal-button-embed');
         return;
     }
 
@@ -185,7 +192,34 @@ const MEMBERSHIP_CONFIG = {
 
         form.hidden = true;
         payPanel.hidden = false;
+        renderPayPalButton('paypal-button-panel');
         payPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Render PayPal's hosted button into a container once the SDK is loaded.
+    function renderPayPalButton(containerId) {
+        const cfg = MEMBERSHIP_CONFIG;
+        const container = document.getElementById(containerId);
+        if (!container || !cfg.paypalClientId || !cfg.paypalHostedButtonId) return;
+        const draw = () => {
+            if (!window.paypal || !window.paypal.HostedButtons) return;
+            container.innerHTML = '';
+            window.paypal.HostedButtons({ hostedButtonId: cfg.paypalHostedButtonId }).render('#' + containerId);
+            container.hidden = false;
+            // The real PayPal button is now on the page; demote the link to a fallback.
+            const link = container.parentElement && container.parentElement.querySelector('a[id^="paypal-pay-link"]');
+            if (link) { link.className = 'btn-link'; link.innerHTML = 'Or open PayPal in a new tab <i class="fas fa-arrow-up-right-from-square"></i>'; }
+        };
+        if (window.paypal && window.paypal.HostedButtons) { draw(); return; }
+        let sdk = document.getElementById('paypal-sdk');
+        if (!sdk) {
+            sdk = document.createElement('script');
+            sdk.id = 'paypal-sdk';
+            sdk.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(cfg.paypalClientId) +
+                '&components=hosted-buttons&enable-funding=venmo&currency=USD';
+            document.head.appendChild(sdk);
+        }
+        sdk.addEventListener('load', draw);
     }
 
     function escapeHtml(str) {

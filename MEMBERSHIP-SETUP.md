@@ -44,7 +44,7 @@ Then open the **...** menu (top right) → **Settings**:
 
 - **Who can fill out this form**: *Anyone can respond*.
 - **Customize thank you message**: paste
-  `Thank you for joining TRIO-Oklahoma! Please finish by paying your $20 dues here: https://www.paypal.com/donate/?hosted_button_id=P6LXMA3R5N5AC&amount=20.00&currency_code=USD`
+  `Thank you for joining TRIO-Oklahoma! Please finish by paying your $20 dues here: https://www.paypal.com/ncp/payment/YP6CEUXRC2M94`
   (swap in the dedicated dues button link from section 4 once you make one).
 - **Get email notification of each response**: turn on. This alone emails the
   form owner; section 3 sends a nicer email to connect@trio-oklahoma.org.
@@ -90,28 +90,21 @@ receipt arrives; filtering on that column shows who still owes dues.
 
 Both connectors are standard, so no premium Power Automate license is needed.
 
-## 4. PayPal: a dedicated $20 dues button (optional, recommended)
+## 4. PayPal: the $20 membership button
 
-By default the Join page links to the chapter's existing PayPal Donate button.
-PayPal ignores the amount in that link, so the page shows $0 and the member has to
-type $20. There are two ways to fix that, both done inside PayPal:
+Membership dues use a dedicated PayPal hosted button named **Membership**
+(ID `YP6CEUXRC2M94`, fixed at $20). Two forms of it are used:
 
-**Option A: add preset amounts to the existing Donate button (quickest).**
-PayPal → Pay & Get Paid → PayPal buttons → find the Donate button → Edit →
-Donation amount → "Let donors choose from preset amounts" → enter 20, 25, 100,
-250. The PayPal page then shows those amounts as tabs, with $20 first. Nothing on
-the website needs to change.
+- **Payment link** `https://www.paypal.com/ncp/payment/YP6CEUXRC2M94`: used by the
+  Join page's "Pay $20 with PayPal" button, the $20 Membership Dues tab on the home
+  page, and the Microsoft Forms thank-you message. This needs nothing else.
+- **Embedded button**: PayPal draws its own button (PayPal, Venmo, and card) inside
+  Step 2 of the Join page using the PayPal JavaScript SDK. The `client-id` from
+  PayPal's button code is stored in `paypalClientId` in `membership.js`. If you ever
+  create a new button, copy the new `client-id` and hosted button ID from PayPal's
+  **Copy code** screen into those two settings.
 
-**Option B: a dedicated $20 dues button (cleaner bookkeeping, since PayPal
-records it as "Membership Dues" rather than a donation).**
-
-1. Log in to PayPal → **Pay & Get Paid → PayPal buttons** → **Buy Now**.
-2. Item name: `TRIO-Oklahoma Membership Dues`. Price: `20.00`.
-3. Under the advanced options set the **return URL** to your site's
-   `join.html?paid=1` (for example `https://trio-oklahoma.org/join.html?paid=1`)
-   so members see a thank-you message after paying.
-4. Save, copy the button link (it contains `hosted_button_id=...`), and paste it
-   into `paypalUrl` in `membership.js`. Update the Forms thank-you message too.
+The donation tiers ($25, $100, $250) still use the general Donate button.
 
 ## Files
 
