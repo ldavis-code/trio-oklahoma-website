@@ -92,9 +92,18 @@ Both connectors are standard, so no premium Power Automate license is needed.
 
 ## 4. PayPal: a dedicated $20 dues button (optional, recommended)
 
-By default the Join page uses the chapter's existing PayPal button with the amount
-pre-filled at $20. That works today, but PayPal records it as a donation. For
-cleaner bookkeeping:
+By default the Join page links to the chapter's existing PayPal Donate button.
+PayPal ignores the amount in that link, so the page shows $0 and the member has to
+type $20. There are two ways to fix that, both done inside PayPal:
+
+**Option A: add preset amounts to the existing Donate button (quickest).**
+PayPal → Pay & Get Paid → PayPal buttons → find the Donate button → Edit →
+Donation amount → "Let donors choose from preset amounts" → enter 20, 25, 100,
+250. The PayPal page then shows those amounts as tabs, with $20 first. Nothing on
+the website needs to change.
+
+**Option B: a dedicated $20 dues button (cleaner bookkeeping, since PayPal
+records it as "Membership Dues" rather than a donation).**
 
 1. Log in to PayPal → **Pay & Get Paid → PayPal buttons** → **Buy Now**.
 2. Item name: `TRIO-Oklahoma Membership Dues`. Price: `20.00`.
