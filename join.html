@@ -93,10 +93,11 @@
                         <h2>Pay your $20 membership dues</h2>
                         <p id="pay-panel-message">Thanks, <strong id="pay-panel-name">friend</strong>! Your information has been recorded. Finish joining by paying your $20 dues securely through PayPal.</p>
                         <div class="join-panel-actions">
+                            <div id="paypal-button-panel" class="paypal-button" hidden></div>
                             <a id="paypal-pay-link" href="#" target="_blank" rel="noopener" class="btn btn--accent btn--lg pulse"><i class="fab fa-paypal"></i> Pay $20 with PayPal</a>
                             <a id="email-fallback-link" href="#" class="btn btn--outline btn--lg" hidden><i class="fas fa-envelope"></i> Email my information to TRIO-Oklahoma</a>
                         </div>
-                        <p class="join-fine-print" id="pay-panel-note">You can pay with a PayPal account or a debit/credit card. If you prefer to pay by check, email <a href="mailto:connect@trio-oklahoma.org">connect@trio-oklahoma.org</a>.</p>
+                        <p class="join-fine-print" id="pay-panel-note">The PayPal page is set to $20. You can pay with a PayPal account or a debit/credit card. If you prefer to pay by check, email <a href="mailto:connect@trio-oklahoma.org">connect@trio-oklahoma.org</a>.</p>
                     </div>
 
                     <!-- Microsoft Forms mode (used when formsEmbedUrl is set in membership.js) -->
@@ -111,8 +112,9 @@
                             <div class="forms-pay-head">
                                 <span class="eyebrow eyebrow--accent">Step 2 of 2</span>
                                 <h3>Pay your $20 membership dues</h3>
-                                <p>After you submit the form, finish joining by paying your dues securely through PayPal. You can use a PayPal account or a debit/credit card.</p>
+                                <p>After you submit the form, finish joining by paying your dues securely through PayPal. The PayPal page is set to $20. You can use a PayPal account or a debit/credit card.</p>
                             </div>
+                            <div id="paypal-button-embed" class="paypal-button" hidden></div>
                             <a id="paypal-pay-link-embed" href="#" target="_blank" rel="noopener" class="btn btn--accent btn--lg pulse"><i class="fab fa-paypal"></i> Pay $20 with PayPal</a>
                             <p class="join-fine-print">Prefer to pay by check? Email <a href="mailto:connect@trio-oklahoma.org">connect@trio-oklahoma.org</a>.</p>
                         </div>
