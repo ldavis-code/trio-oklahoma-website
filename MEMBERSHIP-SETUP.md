@@ -9,7 +9,7 @@ Flow for a new member:
    yes/no, transplant date and hospital, and member type: Recipient, Waiting, Listed,
    Carepartner, Living Donor, or Donor Family).
 2. The form is saved to the **membership log** (a Google Sheet) and an email
-   notification is sent to info@trio-oklahoma.org.
+   notification is sent to connect@trio-oklahoma.org.
 3. The member is shown a **Pay $20 with PayPal** button.
 
 Two one-time setup steps are needed to turn on the log. Until then the page still
@@ -34,7 +34,7 @@ To let the website write to it:
 2. Delete any code in the editor and paste the full contents of
    [`membership-log/Code.gs`](membership-log/Code.gs) from this repository.
    Change `NOTIFY_EMAIL` at the top if notifications should go somewhere other than
-   info@trio-oklahoma.org.
+   connect@trio-oklahoma.org.
 3. Click the **Save** icon, then choose the `testAppend` function in the toolbar and
    click **Run**. Approve the permissions when Google asks (it needs access to the
    sheet and to send email). A test row should appear in the sheet, and a test email
