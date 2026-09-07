@@ -6,14 +6,14 @@
 const MEETINGS = {
     peer: {
         name: 'Peer-to-Peer Support Meeting (Tue & Thu)',
-        zoomUrl: '',        // e.g. 'https://us02web.zoom.us/j/1234567890?pwd=...'
-        meetingId: '',      // e.g. '123 456 7890'
-        passcode: '',       // optional
+        zoomUrl: 'https://zoom.us/j/91620334133',
+        meetingId: '916 2033 4133',
+        passcode: '',       // optional; shown next to the meeting ID if set
     },
     carepartner: {
         name: 'Care Partner & Caregiver Meeting (1st & 3rd Wednesday)',
-        zoomUrl: '',
-        meetingId: '',
+        zoomUrl: 'https://zoom.us/j/82690241864',
+        meetingId: '826 9024 1864',
         passcode: '',
         time: '',           // e.g. '6:30 - 7:30 PM Central'
     },
