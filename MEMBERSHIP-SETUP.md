@@ -35,8 +35,8 @@ Add these questions, in this order. Mark each one Required unless noted.
 | 8 | Phone | Text | |
 | 9 | I am joining as | Choice | Recipient, Waiting, Listed, Carepartner, Living Donor, Donor Family |
 | 10 | Have you received a transplant? | Choice | Yes, No. Use **Add branching** so Yes goes to question 11 and No skips to question 14 |
-| 11 | Transplant date | Date | |
-| 12 | Transplant hospital | Text | |
+| 11 | Transplant date | Date | Optional |
+| 12 | Transplant hospital | Text | Optional |
 | 13 | Organ(s) transplanted | Text | Optional |
 | 14 | Comments: anything you would like us to know? | Text, long answer | **Not required.** Leave the Required toggle off |
 
@@ -49,20 +49,17 @@ Then open the **...** menu (top right) → **Settings**:
 - **Get email notification of each response**: turn on. This alone emails the
   form owner; section 3 sends a nicer email to connect@trio-oklahoma.org.
 
-## 2. Put the form on the website
+## 2. The form on the website
 
-1. In Forms click **Collect responses** (or **Share**) → the **Embed** tab (`< >`).
-2. Copy the embed code. Inside it is a link that starts with
-   `https://forms.office.com/Pages/ResponsePage.aspx?id=` and ends with `&embed=true`.
-   Copy just that link.
-3. Open `membership.js` in this repository and paste it into `formsEmbedUrl`:
+The Join page embeds the TRIO-Oklahoma Membership form:
 
-   ```js
-   formsEmbedUrl: 'https://forms.office.com/Pages/ResponsePage.aspx?id=...&embed=true',
-   ```
+```
+https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4JDjAiacvEe1mMoOeMQMWabvG_hxnn5JjTezkFmwYwNUNEdVMlBQVjI0QVIyTVc0VDNVWkFMQ1ZBTi4u
+```
 
-4. Commit and publish. The Join page now shows the Microsoft Form as Step 1 and
-   the PayPal button as Step 2.
+That link, with `&embed=true` added, is stored in `formsEmbedUrl` in `membership.js`.
+If you ever replace the form, paste the new form's link there (keep `&embed=true`
+on the end), commit, and publish.
 
 ## 3. The membership log (Excel) and the new-member email
 

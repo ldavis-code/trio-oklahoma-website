@@ -4,11 +4,11 @@
    ========================================= */
 
 const MEMBERSHIP_CONFIG = {
-    // Microsoft Forms embed link (Share -> Embed -> copy the src URL, which ends
-    // in "&embed=true"). When set, the Microsoft Form is shown in place of the
-    // built-in form and every response lands in the Excel workbook in
-    // TRIO-Oklahoma's OneDrive. See MEMBERSHIP-SETUP.md.
-    formsEmbedUrl: '',
+    // Microsoft Forms link for the TRIO-Oklahoma Membership form, with
+    // "&embed=true" added so it fits inside the page. Every response lands in
+    // the Excel workbook in TRIO-Oklahoma's OneDrive. Leave empty to use the
+    // built-in form instead. See MEMBERSHIP-SETUP.md.
+    formsEmbedUrl: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4JDjAiacvEe1mMoOeMQMWabvG_hxnn5JjTezkFmwYwNUNEdVMlBQVjI0QVIyTVc0VDNVWkFMQ1ZBTi4u&embed=true',
 
     // Only used when formsEmbedUrl is empty: a URL that the built-in form
     // POSTs each member to (for example a Power Automate HTTP trigger).
@@ -72,8 +72,6 @@ const MEMBERSHIP_CONFIG = {
         radio.addEventListener('change', () => {
             const yes = form.transplanted.value === 'Yes';
             details.hidden = !yes;
-            dateInput.required = yes;
-            hospitalInput.required = yes;
             if (!yes) { dateInput.value = ''; hospitalInput.value = ''; }
         });
     });
@@ -122,9 +120,6 @@ const MEMBERSHIP_CONFIG = {
         }
         if (!data.memberType) return 'Please tell us how you are joining (Recipient, Waiting, Listed, Carepartner, Living Donor, or Donor Family).';
         if (!data.transplanted) return 'Please tell us whether you have received a transplant.';
-        if (data.transplanted === 'Yes' && (!data.transplantDate || !data.transplantHospital)) {
-            return 'Please enter your transplant date and transplant hospital.';
-        }
         return '';
     }
 
