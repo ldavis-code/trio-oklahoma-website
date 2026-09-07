@@ -1,3 +1,59 @@
+// =========================================
+// Meeting links (Zoom)
+// Fill these in and every "Join Meeting" button on the site updates.
+// Leave zoomUrl empty and the button becomes a "Request Zoom link" email instead.
+// =========================================
+const MEETINGS = {
+    peer: {
+        name: 'Peer-to-Peer Support Meeting (Tue & Thu)',
+        zoomUrl: '',        // e.g. 'https://us02web.zoom.us/j/1234567890?pwd=...'
+        meetingId: '',      // e.g. '123 456 7890'
+        passcode: '',       // optional
+    },
+    carepartner: {
+        name: 'Care Partner & Caregiver Meeting (1st & 3rd Wednesday)',
+        zoomUrl: '',
+        meetingId: '',
+        passcode: '',
+        time: '',           // e.g. '6:30 - 7:30 PM Central'
+    },
+};
+const CONTACT_EMAIL = 'connect@trio-oklahoma.org';
+
+function wireMeetings() {
+    Object.keys(MEETINGS).forEach((key) => {
+        const m = MEETINGS[key];
+
+        document.querySelectorAll('[data-meeting="' + key + '"]').forEach((btn) => {
+            if (m.zoomUrl) {
+                btn.href = m.zoomUrl;
+                btn.target = '_blank';
+                btn.rel = 'noopener';
+                btn.innerHTML = '<i class="fas fa-video"></i> Join on Zoom';
+            } else {
+                btn.href = 'mailto:' + CONTACT_EMAIL +
+                    '?subject=' + encodeURIComponent('Zoom link for the ' + m.name) +
+                    '&body=' + encodeURIComponent('Hello TRIO-Oklahoma,\n\nPlease send me the Zoom link for the ' + m.name + '.\n\nThank you!');
+                btn.removeAttribute('target');
+                btn.innerHTML = '<i class="fas fa-envelope"></i> Request Zoom Link';
+            }
+        });
+
+        document.querySelectorAll('[data-meeting-id="' + key + '"]').forEach((el) => {
+            if (!m.meetingId) return;
+            el.querySelector('span').textContent = 'Meeting ID: ' + m.meetingId + (m.passcode ? ' \u00b7 Passcode: ' + m.passcode : '');
+            el.hidden = false;
+        });
+
+        document.querySelectorAll('[data-meeting-time="' + key + '"]').forEach((el) => {
+            if (!m.time) return;
+            el.querySelector('span').textContent = m.time;
+            el.hidden = false;
+        });
+    });
+}
+wireMeetings();
+
 // Mobile menu toggle
 function toggleMobileMenu() {
     document.getElementById('mobile-menu').classList.toggle('is-open');
