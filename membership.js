@@ -4,8 +4,15 @@
    ========================================= */
 
 const MEMBERSHIP_CONFIG = {
-    // Google Apps Script "web app" URL that writes to the Membership Log sheet.
-    // See MEMBERSHIP-SETUP.md. Leave empty to fall back to an email link.
+    // Microsoft Forms embed link (Share -> Embed -> copy the src URL, which ends
+    // in "&embed=true"). When set, the Microsoft Form is shown in place of the
+    // built-in form and every response lands in the Excel workbook in
+    // TRIO-Oklahoma's OneDrive. See MEMBERSHIP-SETUP.md.
+    formsEmbedUrl: '',
+
+    // Only used when formsEmbedUrl is empty: a URL that the built-in form
+    // POSTs each member to (for example a Power Automate HTTP trigger).
+    // Leave empty to fall back to an email link.
     logEndpoint: '',
 
     // PayPal link for the $20 dues. This uses the chapter's existing PayPal
@@ -20,6 +27,7 @@ const MEMBERSHIP_CONFIG = {
 (function () {
     const form = document.getElementById('membership-form');
     if (!form) return;
+  try {
 
     const alertBox = document.getElementById('form-alert');
     const submitBtn = document.getElementById('submit-btn');
@@ -34,6 +42,21 @@ const MEMBERSHIP_CONFIG = {
     if (params.get('paid') === '1') {
         form.hidden = true;
         paidPanel.hidden = false;
+        return;
+    }
+
+    // Microsoft Forms mode: show the embedded form plus a standing PayPal step.
+    if (MEMBERSHIP_CONFIG.formsEmbedUrl) {
+        const embed = document.getElementById('forms-embed');
+        const frame = document.createElement('iframe');
+        frame.src = MEMBERSHIP_CONFIG.formsEmbedUrl;
+        frame.title = 'TRIO-Oklahoma membership form';
+        frame.setAttribute('allowfullscreen', '');
+        frame.setAttribute('loading', 'lazy');
+        embed.querySelector('.forms-frame').appendChild(frame);
+        document.getElementById('paypal-pay-link-embed').href = MEMBERSHIP_CONFIG.paypalUrl;
+        form.hidden = true;
+        embed.hidden = false;
         return;
     }
 
@@ -82,9 +105,12 @@ const MEMBERSHIP_CONFIG = {
 
     function validate(data) {
         if (!form.checkValidity()) {
+            form.classList.add('was-validated');
             // Surface the first invalid field
             const firstInvalid = form.querySelector(':invalid');
-            if (firstInvalid) firstInvalid.focus();
+            if (firstInvalid && typeof firstInvalid.focus === 'function') {
+                try { firstInvalid.focus({ preventScroll: true }); } catch (ignore) { /* no-op */ }
+            }
             return 'Please fill in all required fields before continuing.';
         }
         if (!data.memberType) return 'Please tell us how you are joining (Recipient, Waiting, Listed, Carepartner, Living Donor, or Donor Family).';
@@ -170,20 +196,43 @@ const MEMBERSHIP_CONFIG = {
         e.preventDefault();
         alertBox.hidden = true;
 
-        const data = collect();
-        if (data.website) return; // bot filled the honeypot; silently ignore
+        try {
+            const data = collect();
 
-        const problem = validate(data);
-        if (problem) { showAlert(problem, 'error'); return; }
+            const problem = validate(data);
+            if (problem) { showAlert(problem, 'error'); return; }
 
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Saving...';
+            // Open PayPal right away, while we are still inside the click so
+            // browsers allow the new tab. Step 2 keeps a PayPal button too, in
+            // case a popup blocker stops this.
+            const payWindow = window.open(MEMBERSHIP_CONFIG.paypalUrl, '_blank');
+            if (payWindow) { try { payWindow.opener = null; } catch (ignore) { /* no-op */ } }
 
-        const result = await logMember(data);
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Saving...';
 
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Continue to Payment <i class="fas fa-arrow-right"></i>';
+            const result = await logMember(data);
 
-        showPayStep(data, result);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Continue to Payment <i class="fas fa-arrow-right"></i>';
+
+            showPayStep(data, result);
+        } catch (err) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Continue to Payment <i class="fas fa-arrow-right"></i>';
+            showAlert('Something went wrong on this page (' + (err && err.message ? err.message : err) +
+                '). You can still pay your $' + MEMBERSHIP_CONFIG.duesAmount + ' dues at ' + MEMBERSHIP_CONFIG.paypalUrl +
+                ' and email your information to ' + MEMBERSHIP_CONFIG.contactEmail + '.', 'error');
+        }
     });
+  } catch (err) {
+    // If setup fails for any reason, make the button a plain link to PayPal
+    // rather than a dead button.
+    const btn = document.getElementById('submit-btn');
+    if (btn) {
+        btn.type = 'button';
+        btn.addEventListener('click', () => { window.open(MEMBERSHIP_CONFIG.paypalUrl, '_blank'); });
+    }
+    if (window.console) console.error('membership.js setup failed:', err);
+  }
 })();
