@@ -4,8 +4,15 @@
    ========================================= */
 
 const MEMBERSHIP_CONFIG = {
-    // Google Apps Script "web app" URL that writes to the Membership Log sheet.
-    // See MEMBERSHIP-SETUP.md. Leave empty to fall back to an email link.
+    // Microsoft Forms embed link (Share -> Embed -> copy the src URL, which ends
+    // in "&embed=true"). When set, the Microsoft Form is shown in place of the
+    // built-in form and every response lands in the Excel workbook in
+    // TRIO-Oklahoma's OneDrive. See MEMBERSHIP-SETUP.md.
+    formsEmbedUrl: '',
+
+    // Only used when formsEmbedUrl is empty: a URL that the built-in form
+    // POSTs each member to (for example a Power Automate HTTP trigger).
+    // Leave empty to fall back to an email link.
     logEndpoint: '',
 
     // PayPal link for the $20 dues. This uses the chapter's existing PayPal
@@ -34,6 +41,21 @@ const MEMBERSHIP_CONFIG = {
     if (params.get('paid') === '1') {
         form.hidden = true;
         paidPanel.hidden = false;
+        return;
+    }
+
+    // Microsoft Forms mode: show the embedded form plus a standing PayPal step.
+    if (MEMBERSHIP_CONFIG.formsEmbedUrl) {
+        const embed = document.getElementById('forms-embed');
+        const frame = document.createElement('iframe');
+        frame.src = MEMBERSHIP_CONFIG.formsEmbedUrl;
+        frame.title = 'TRIO-Oklahoma membership form';
+        frame.setAttribute('allowfullscreen', '');
+        frame.setAttribute('loading', 'lazy');
+        embed.querySelector('.forms-frame').appendChild(frame);
+        document.getElementById('paypal-pay-link-embed').href = MEMBERSHIP_CONFIG.paypalUrl;
+        form.hidden = true;
+        embed.hidden = false;
         return;
     }
 

@@ -768,3 +768,17 @@ ul { list-style: none; padding: 0; margin: 0; }
 .join-help p + p { margin-top: 0.5rem; }
 .join-help i { color: var(--color-accent); }
 .join-help a { color: var(--color-secondary); font-weight: 600; }
+
+/* Microsoft Forms embed mode */
+.forms-embed[hidden] { display: none; }
+.forms-frame { border: 1.5px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-light); }
+.forms-frame iframe { display: block; width: 100%; height: 1500px; border: 0; }
+@media (max-width: 639px) { .forms-frame iframe { height: 1700px; } }
+.forms-pay {
+    margin-top: 2rem; padding: 2rem; text-align: center;
+    background: var(--color-light); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    display: flex; flex-direction: column; align-items: center; gap: 1.25rem;
+}
+.forms-pay h3 { font-family: var(--font-serif); font-size: 1.6rem; margin: 0.75rem 0 0.5rem; }
+.forms-pay p { color: var(--color-muted); max-width: 32rem; margin: 0 auto; line-height: 1.6; }
+.forms-pay .join-fine-print { margin: 0; }

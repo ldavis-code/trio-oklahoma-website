@@ -1,92 +1,113 @@
 # TRIO-Oklahoma Membership: setup guide
 
-The **Join** page (`join.html`) collects each new member's information, records it in
-the membership log, and then sends them to PayPal to pay the $20 dues.
+The **Join** page (`join.html`) collects each new member's information for the
+membership log and then sends them to PayPal to pay the $20 dues.
 
-Flow for a new member:
+TRIO-Oklahoma runs on Microsoft 365, so the log lives there:
 
-1. Fill out the form on `join.html` (name, mailing address, email, phone, transplanted
-   yes/no, transplant date and hospital, and member type: Recipient, Waiting, Listed,
-   Carepartner, Living Donor, or Donor Family).
-2. The form is saved to the **membership log** (a Google Sheet) and an email
-   notification is sent to connect@trio-oklahoma.org.
-3. The member is shown a **Pay $20 with PayPal** button.
+| Piece | Microsoft 365 app |
+| --- | --- |
+| Member form | **Microsoft Forms** (embedded on the Join page) |
+| Membership log | **Excel** workbook in OneDrive, filled automatically by Forms |
+| New-member email to connect@trio-oklahoma.org | **Power Automate** + **Outlook** |
+| $20 dues | **PayPal** button on the Join page and in the form's thank-you message |
 
-Two one-time setup steps are needed to turn on the log. Until then the page still
-works: members are asked to pay through PayPal and to email their information.
+No extra services (Resend, Netlify, and so on) are needed.
 
 ---
 
-## 1. Connect the membership log (Google Sheet) — about 5 minutes
+## 1. Create the form in Microsoft Forms (about 10 minutes)
 
-The log lives here:
+Sign in to Microsoft 365 as the TRIO-Oklahoma account, open **Forms**, and click
+**New Form**. Title it `TRIO-Oklahoma Membership`.
 
-**TRIO-Oklahoma Membership Log**
-https://docs.google.com/spreadsheets/d/1FpxANRQ3gmzazxPvosE5CqB6c9RJ1JXoN13uVPbdHH0/edit
+Add these questions, in this order. Mark each one Required unless noted.
 
-Columns: Timestamp, First Name, Last Name, Mailing Address, City, State, ZIP, Email,
-Phone, Transplanted, Transplant Date, Transplant Hospital, Member Type, Organ(s),
-Payment, Notes.
+| # | Question | Type | Notes |
+| --- | --- | --- | --- |
+| 1 | First name | Text | |
+| 2 | Last name | Text | |
+| 3 | Mailing address (street) | Text | |
+| 4 | City | Text | |
+| 5 | State | Text | |
+| 6 | ZIP | Text | |
+| 7 | Email address | Text | Turn on **Restrictions → Email** if offered |
+| 8 | Phone | Text | |
+| 9 | I am joining as | Choice | Recipient, Waiting, Listed, Carepartner, Living Donor, Donor Family |
+| 10 | Have you received a transplant? | Choice | Yes, No. Use **Add branching** so Yes goes to question 11 and No skips to question 14 |
+| 11 | Transplant date | Date | |
+| 12 | Transplant hospital | Text | |
+| 13 | Organ(s) transplanted | Text | Optional |
+| 14 | Anything you would like us to know? | Text, long answer | Optional |
 
-To let the website write to it:
+Then open the **...** menu (top right) → **Settings**:
 
-1. Open the sheet above. In the menu choose **Extensions → Apps Script**.
-2. Delete any code in the editor and paste the full contents of
-   [`membership-log/Code.gs`](membership-log/Code.gs) from this repository.
-   Change `NOTIFY_EMAIL` at the top if notifications should go somewhere other than
-   connect@trio-oklahoma.org.
-3. Click the **Save** icon, then choose the `testAppend` function in the toolbar and
-   click **Run**. Approve the permissions when Google asks (it needs access to the
-   sheet and to send email). A test row should appear in the sheet, and a test email
-   should arrive. Delete the test row afterward.
-4. Click **Deploy → New deployment**.
-   - Type: **Web app**
-   - Description: `Membership log`
-   - Execute as: **Me**
-   - Who has access: **Anyone**
-   Click **Deploy** and copy the **Web app URL** (it ends in `/exec`).
-5. Open `membership.js` in this repository and paste that URL into `logEndpoint`:
+- **Who can fill out this form**: *Anyone can respond*.
+- **Customize thank you message**: paste
+  `Thank you for joining TRIO-Oklahoma! Please finish by paying your $20 dues here: https://www.paypal.com/donate/?hosted_button_id=P6LXMA3R5N5AC&amount=20.00&currency_code=USD`
+  (swap in the dedicated dues button link from section 4 once you make one).
+- **Get email notification of each response**: turn on. This alone emails the
+  form owner; section 3 sends a nicer email to connect@trio-oklahoma.org.
+
+## 2. Put the form on the website
+
+1. In Forms click **Collect responses** (or **Share**) → the **Embed** tab (`< >`).
+2. Copy the embed code. Inside it is a link that starts with
+   `https://forms.office.com/Pages/ResponsePage.aspx?id=` and ends with `&embed=true`.
+   Copy just that link.
+3. Open `membership.js` in this repository and paste it into `formsEmbedUrl`:
 
    ```js
-   logEndpoint: 'https://script.google.com/macros/s/AKfycb.../exec',
+   formsEmbedUrl: 'https://forms.office.com/Pages/ResponsePage.aspx?id=...&embed=true',
    ```
 
-6. Commit and publish the site. Submit the form once yourself to confirm a row appears.
+4. Commit and publish. The Join page now shows the Microsoft Form as Step 1 and
+   the PayPal button as Step 2.
 
-If you ever edit `Code.gs`, choose **Deploy → Manage deployments → Edit → Version: New
-version → Deploy** so the change goes live. The URL stays the same.
+## 3. The membership log (Excel) and the new-member email
 
-## 2. PayPal: the $20 dues button
+**The log.** In Forms open the **Responses** tab and click **Open in Excel**. The
+first time, choose to keep the results in OneDrive: Forms creates a workbook named
+`TRIO-Oklahoma Membership(1-...).xlsx` (rename it to `TRIO-Oklahoma Membership Log`
+if you like) that updates itself every time someone submits. Each row has every
+answer plus a timestamp. Add a column called **Paid** and mark it when the PayPal
+receipt arrives; filtering on that column shows who still owes dues.
+
+**The email.** Open **Power Automate** → **Create** → **Automated cloud flow**:
+
+1. Name: `New TRIO-Oklahoma member`. Trigger: *When a new response is submitted*
+   (Microsoft Forms). Choose the membership form. Click **Create**.
+2. **+ New step** → *Get response details* (Microsoft Forms). Form: the membership
+   form. Response Id: pick **Response Id** from the dynamic content list.
+3. **+ New step** → *Send an email (V2)* (Office 365 Outlook).
+   - To: `connect@trio-oklahoma.org`
+   - Subject: `New TRIO-Oklahoma member: ` then insert **First name** and **Last name**
+   - Body: insert the fields you want (name, address, email, phone, joining as,
+     transplanted, date, hospital) one per line, and add a line such as
+     `Payment: pending. Check PayPal for $20 dues and mark the Excel log.`
+4. **Save**, then submit the form once yourself to confirm the row and the email
+   both arrive. Delete the test row from Excel afterward.
+
+Both connectors are standard, so no premium Power Automate license is needed.
+
+## 4. PayPal: a dedicated $20 dues button (optional, recommended)
 
 By default the Join page uses the chapter's existing PayPal button with the amount
-pre-filled at $20:
+pre-filled at $20. That works today, but PayPal records it as a donation. For
+cleaner bookkeeping:
 
-```
-https://www.paypal.com/donate/?hosted_button_id=P6LXMA3R5N5AC&amount=20.00&currency_code=USD
-```
-
-That works today, but the payment shows up in PayPal as a donation. For cleaner
-bookkeeping, create a dedicated dues button:
-
-1. Log in to PayPal → **Pay & Get Paid → PayPal buttons** (or search "Buy Now button").
-2. Choose **Buy Now**. Item name: `TRIO-Oklahoma Membership Dues`. Price: `20.00`.
-3. Under advanced/customize options, set the **return URL** to your site's
-   `join.html?paid=1` (for example `https://trio-oklahoma.org/join.html?paid=1`).
-   That page shows the member a thank-you message after they pay.
-4. Save the button and copy its link (it will contain `hosted_button_id=...`).
-5. Paste it into `paypalUrl` in `membership.js`.
-
-## Reconciling payments
-
-Each new row in the sheet starts with **Payment = "Pending - PayPal $20"**. When the
-PayPal payment email arrives, match it by name/email and update that cell to
-`Paid` with the date. Filtering the Payment column shows who still owes dues.
+1. Log in to PayPal → **Pay & Get Paid → PayPal buttons** → **Buy Now**.
+2. Item name: `TRIO-Oklahoma Membership Dues`. Price: `20.00`.
+3. Under the advanced options set the **return URL** to your site's
+   `join.html?paid=1` (for example `https://trio-oklahoma.org/join.html?paid=1`)
+   so members see a thank-you message after paying.
+4. Save, copy the button link (it contains `hosted_button_id=...`), and paste it
+   into `paypalUrl` in `membership.js`. Update the Forms thank-you message too.
 
 ## Files
 
 | File | Purpose |
 | --- | --- |
-| `join.html` | Membership page with the form and the PayPal step |
-| `membership.js` | Form validation, sends the entry to the log, shows the PayPal step. Holds the `logEndpoint` and `paypalUrl` settings. |
-| `membership-log/Code.gs` | Google Apps Script that writes rows to the sheet and emails a notification |
+| `join.html` | Membership page: embedded Microsoft Form, PayPal step, thank-you state |
+| `membership.js` | Settings (`formsEmbedUrl`, `paypalUrl`) and page behavior. Also contains a built-in HTML form that is used only when `formsEmbedUrl` is empty. |
 | `styles.css` | Join page styles (bottom of the file) |

@@ -99,6 +99,25 @@
                         <p class="join-fine-print" id="pay-panel-note">You can pay with a PayPal account or a debit/credit card. If you prefer to pay by check, email <a href="mailto:connect@trio-oklahoma.org">connect@trio-oklahoma.org</a>.</p>
                     </div>
 
+                    <!-- Microsoft Forms mode (used when formsEmbedUrl is set in membership.js) -->
+                    <div id="forms-embed" class="forms-embed" hidden>
+                        <div class="join-form-head">
+                            <span class="eyebrow eyebrow--secondary">Step 1 of 2</span>
+                            <h2>Member Information</h2>
+                            <p>Fill out the form below and click <strong>Submit</strong>. Your information goes straight to TRIO-Oklahoma's membership log.</p>
+                        </div>
+                        <div class="forms-frame"></div>
+                        <div class="forms-pay">
+                            <div class="forms-pay-head">
+                                <span class="eyebrow eyebrow--accent">Step 2 of 2</span>
+                                <h3>Pay your $20 membership dues</h3>
+                                <p>After you submit the form, finish joining by paying your dues securely through PayPal. You can use a PayPal account or a debit/credit card.</p>
+                            </div>
+                            <a id="paypal-pay-link-embed" href="#" target="_blank" rel="noopener" class="btn btn--accent btn--lg pulse"><i class="fab fa-paypal"></i> Pay $20 with PayPal</a>
+                            <p class="join-fine-print">Prefer to pay by check? Email <a href="mailto:connect@trio-oklahoma.org">connect@trio-oklahoma.org</a>.</p>
+                        </div>
+                    </div>
+
                     <!-- Step 1: the form -->
                     <form id="membership-form" class="join-form" novalidate>
                         <div class="join-form-head">
