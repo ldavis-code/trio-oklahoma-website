@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join TRIO-Oklahoma | Membership</title>
+    <meta name="description" content="Become a member of TRIO-Oklahoma. $20 membership dues, payable with PayPal. Open to recipients, candidates, care partners, living donors, and donor families.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ========== Navigation ========== -->
+    <nav class="nav" id="navbar">
+        <div class="container nav-inner">
+            <a class="nav-brand" href="index.html">
+                <img src="photos/trio-logo.jpg" alt="TRIO tree logo">
+                <div>
+                    <h1>TRIO-Oklahoma</h1>
+                    <p>Transplant Recipients International Org</p>
+                </div>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#team-oklahoma">Team Oklahoma</a>
+                <a href="index.html#support">Support</a>
+                <a href="index.html#survey">Research</a>
+                <a href="index.html#blog">Stories</a>
+                <a href="join.html" class="is-active">Join</a>
+                <a href="https://www.paypal.com/donate/?hosted_button_id=P6LXMA3R5N5AC" target="_blank" rel="noopener" class="btn btn--accent pulse"><i class="fab fa-paypal"></i> Donate</a>
+            </div>
+
+            <button class="nav-burger" aria-label="Open menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div class="nav-mobile" id="mobile-menu">
+            <div class="container nav-mobile-inner">
+                <a href="index.html#about">About</a>
+                <a href="index.html#team-oklahoma">Team Oklahoma</a>
+                <a href="index.html#support">Support</a>
+                <a href="index.html#survey">Research</a>
+                <a href="index.html#blog">Stories</a>
+                <a href="join.html">Join</a>
+                <a href="https://www.paypal.com/donate/?hosted_button_id=P6LXMA3R5N5AC" target="_blank" rel="noopener" class="is-cta"><i class="fab fa-paypal"></i> Donate with PayPal</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== Join Hero ========== -->
+    <section class="hero hero--compact">
+        <div class="hero-blobs" aria-hidden="true">
+            <span class="blob-1"></span>
+            <span class="blob-2"></span>
+        </div>
+        <div class="container">
+            <div class="join-hero">
+                <span class="eyebrow eyebrow--on-dark"><i class="fas fa-id-card"></i> Membership</span>
+                <h1>Join <span class="accent">TRIO-Oklahoma</span></h1>
+                <p>We are a member-driven organization. Your $20 membership dues keep our peer support meetings, education, and advocacy going for transplant families across Oklahoma.</p>
+                <div class="join-steps">
+                    <div class="join-step"><span class="num">1</span><span>Fill out the member form</span></div>
+                    <div class="join-step"><span class="num">2</span><span>Pay $20 dues with PayPal</span></div>
+                    <div class="join-step"><span class="num">3</span><span>Welcome to the family</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-fade" aria-hidden="true"></div>
+    </section>
+
+    <!-- ========== Join Form ========== -->
+    <section id="join" class="section section--white section--join">
+        <div class="container">
+            <div class="join-layout">
+
+                <div class="join-form-wrap">
+
+                    <!-- Thank-you state (shown after PayPal returns with ?paid=1) -->
+                    <div class="join-panel join-panel--success" id="paid-panel" hidden>
+                        <div class="join-panel-icon"><i class="fas fa-check"></i></div>
+                        <h2>Thank you &amp; welcome!</h2>
+                        <p>Your membership payment was received. We will be in touch soon with meeting details and ways to get involved.</p>
+                        <a href="index.html#support" class="btn btn--primary">See Peer Support Meetings <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Step 2 state (shown after the form is logged) -->
+                    <div class="join-panel" id="pay-panel" hidden>
+                        <div class="join-panel-icon join-panel-icon--accent"><i class="fab fa-paypal"></i></div>
+                        <span class="eyebrow eyebrow--accent">Step 2 of 2</span>
+                        <h2>Pay your $20 membership dues</h2>
+                        <p id="pay-panel-message">Thanks, <strong id="pay-panel-name">friend</strong>! Your information has been recorded. Finish joining by paying your $20 dues securely through PayPal.</p>
+                        <div class="join-panel-actions">
+                            <a id="paypal-pay-link" href="#" target="_blank" rel="noopener" class="btn btn--accent btn--lg pulse"><i class="fab fa-paypal"></i> Pay $20 with PayPal</a>
+                            <a id="email-fallback-link" href="#" class="btn btn--outline btn--lg" hidden><i class="fas fa-envelope"></i> Email my information to TRIO-Oklahoma</a>
+                        </div>
+                        <p class="join-fine-print" id="pay-panel-note">You can pay with a PayPal account or a debit/credit card. If you prefer to pay by check, email <a href="mailto:info@trio-oklahoma.org">info@trio-oklahoma.org</a>.</p>
+                    </div>
+
+                    <!-- Step 1: the form -->
+                    <form id="membership-form" class="join-form" novalidate>
+                        <div class="join-form-head">
+                            <span class="eyebrow eyebrow--secondary">Step 1 of 2</span>
+                            <h2>Member Information</h2>
+                            <p>Fields marked <span class="req">*</span> are required. Your information is kept private and used only by TRIO-Oklahoma.</p>
+                        </div>
+
+                        <fieldset>
+                            <legend><i class="fas fa-user"></i> About You</legend>
+                            <div class="form-grid">
+                                <div class="field">
+                                    <label for="firstName">First name <span class="req">*</span></label>
+                                    <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+                                </div>
+                                <div class="field">
+                                    <label for="lastName">Last name <span class="req">*</span></label>
+                                    <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+                                </div>
+                                <div class="field">
+                                    <label for="email">Email address <span class="req">*</span></label>
+                                    <input type="email" id="email" name="email" autocomplete="email" required>
+                                </div>
+                                <div class="field">
+                                    <label for="phone">Phone <span class="req">*</span></label>
+                                    <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(405) 555-0100" required>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend><i class="fas fa-map-marker-alt"></i> Mailing Address</legend>
+                            <div class="form-grid">
+                                <div class="field field--full">
+                                    <label for="address">Street address <span class="req">*</span></label>
+                                    <input type="text" id="address" name="address" autocomplete="street-address" required>
+                                </div>
+                                <div class="field">
+                                    <label for="city">City <span class="req">*</span></label>
+                                    <input type="text" id="city" name="city" autocomplete="address-level2" required>
+                                </div>
+                                <div class="field field--split">
+                                    <div>
+                                        <label for="state">State <span class="req">*</span></label>
+                                        <input type="text" id="state" name="state" value="OK" maxlength="2" autocomplete="address-level1" required>
+                                    </div>
+                                    <div>
+                                        <label for="zip">ZIP <span class="req">*</span></label>
+                                        <input type="text" id="zip" name="zip" inputmode="numeric" autocomplete="postal-code" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend><i class="fas fa-heart-pulse"></i> Your Transplant Connection</legend>
+
+                            <div class="field">
+                                <span class="field-label">I am joining as a: <span class="req">*</span></span>
+                                <div class="choice-grid" role="radiogroup" aria-label="Member type">
+                                    <label class="choice"><input type="radio" name="memberType" value="Recipient" required><span><i class="fas fa-heart"></i> Recipient</span></label>
+                                    <label class="choice"><input type="radio" name="memberType" value="Waiting"><span><i class="fas fa-hourglass-half"></i> Waiting</span></label>
+                                    <label class="choice"><input type="radio" name="memberType" value="Listed"><span><i class="fas fa-list-check"></i> Listed</span></label>
+                                    <label class="choice"><input type="radio" name="memberType" value="Carepartner"><span><i class="fas fa-hands-holding-heart"></i> Carepartner</span></label>
+                                    <label class="choice"><input type="radio" name="memberType" value="Living Donor"><span><i class="fas fa-hand-holding-heart"></i> Living Donor</span></label>
+                                    <label class="choice"><input type="radio" name="memberType" value="Donor Family"><span><i class="fas fa-people-roof"></i> Donor Family</span></label>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <span class="field-label">Have you received a transplant? <span class="req">*</span></span>
+                                <div class="choice-grid choice-grid--2" role="radiogroup" aria-label="Transplanted">
+                                    <label class="choice"><input type="radio" name="transplanted" value="Yes" required><span><i class="fas fa-check"></i> Yes</span></label>
+                                    <label class="choice"><input type="radio" name="transplanted" value="No"><span><i class="fas fa-minus"></i> No</span></label>
+                                </div>
+                            </div>
+
+                            <div class="form-grid" id="transplant-details" hidden>
+                                <div class="field">
+                                    <label for="transplantDate">Transplant date <span class="req">*</span></label>
+                                    <input type="date" id="transplantDate" name="transplantDate">
+                                </div>
+                                <div class="field">
+                                    <label for="transplantHospital">Transplant hospital <span class="req">*</span></label>
+                                    <input type="text" id="transplantHospital" name="transplantHospital" placeholder="e.g. INTEGRIS Nazih Zuhdi Transplant Institute">
+                                </div>
+                                <div class="field field--full">
+                                    <label for="organ">Organ(s) transplanted <small>(optional)</small></label>
+                                    <input type="text" id="organ" name="organ" placeholder="e.g. Liver, Kidney, Heart">
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label for="notes">Anything you would like us to know? <small>(optional)</small></label>
+                                <textarea id="notes" name="notes" rows="3"></textarea>
+                            </div>
+                        </fieldset>
+
+                        <!-- Honeypot: hidden from people, filled by bots -->
+                        <div class="hp" aria-hidden="true">
+                            <label for="website">Website</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+                        <div class="join-form-foot">
+                            <div class="dues">
+                                <span class="dues-amount">$20</span>
+                                <span class="dues-label">membership dues<br><small>paid in Step 2 via PayPal</small></span>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--lg" id="submit-btn">
+                                Continue to Payment <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <aside class="join-aside">
+                    <div class="card card--dark join-benefits">
+                        <i class="fas fa-users"></i>
+                        <h3>Why become a member?</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Twice-weekly peer support meetings</li>
+                            <li><i class="fas fa-check-circle"></i> A voice in transplant policy through TRIO, a voting member of the OPTN</li>
+                            <li><i class="fas fa-check-circle"></i> Education, resources, and mentor connections</li>
+                            <li><i class="fas fa-check-circle"></i> Team Oklahoma and the Transplant Games community</li>
+                            <li><i class="fas fa-check-circle"></i> Support for care partners, living donors, and donor families</li>
+                        </ul>
+                    </div>
+
+                    <div class="card join-who">
+                        <h4>Who can join?</h4>
+                        <p>Transplant recipients, people waiting or listed for transplant, care partners, living donors, and donor families. Everyone who cares about the transplant community is welcome.</p>
+                    </div>
+
+                    <div class="card join-help">
+                        <h4>Questions?</h4>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:info@trio-oklahoma.org">info@trio-oklahoma.org</a></p>
+                        <p><i class="fas fa-user"></i> Jeff Collins, President</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== Footer ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="brand">
+                        <div class="mark"><i class="fas fa-heart-pulse"></i></div>
+                        <h3>TRIO-Oklahoma</h3>
+                    </div>
+                    <p class="blurb">A 501(c)(3) non-profit membership organization serving the transplant community of Oklahoma.</p>
+                </div>
+
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#team-oklahoma">Team Oklahoma</a></li>
+                        <li><a href="index.html#support">Support Groups</a></li>
+                        <li><a href="index.html#survey">Patient Survey</a></li>
+                        <li><a href="join.html">Become a Member</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@trio-oklahoma.org">Request Information</a></li>
+                        <li><a href="https://www.lifeshareoklahoma.org/" target="_blank" rel="noopener">Register as Donor (LifeShare)</a></li>
+                        <li><a href="#">Transplant Living</a></li>
+                        <li><a href="#">Blog &amp; Articles</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope"></i><span>info@trio-oklahoma.org</span></li>
+                        <li><i class="fas fa-user"></i><span>Jeff Collins, President</span></li>
+                        <li><i class="fas fa-map-marker-alt"></i><span>Oklahoma, USA</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 TRIO-Oklahoma. All rights reserved. A chapter of Transplant Recipients International Organization.</p>
+                <nav>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Accessibility</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="membership.js"></script>
+</body>
+</html>
