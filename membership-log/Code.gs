@@ -10,7 +10,7 @@
  */
 
 // Who gets an email each time someone joins. Leave '' to disable emails.
-var NOTIFY_EMAIL = 'info@trio-oklahoma.org';
+var NOTIFY_EMAIL = 'connect@trio-oklahoma.org';
 
 // Name of the tab that holds the log. Falls back to the first tab if not found.
 var SHEET_NAME = 'Members';

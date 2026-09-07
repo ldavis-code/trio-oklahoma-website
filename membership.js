@@ -14,7 +14,7 @@ const MEMBERSHIP_CONFIG = {
     paypalUrl: 'https://www.paypal.com/donate/?hosted_button_id=P6LXMA3R5N5AC&amount=20.00&currency_code=USD',
 
     duesAmount: 20,
-    contactEmail: 'info@trio-oklahoma.org',
+    contactEmail: 'connect@trio-oklahoma.org',
 };
 
 (function () {
