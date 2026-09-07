@@ -804,3 +804,6 @@ ul { list-style: none; padding: 0; margin: 0; }
 }
 .paypal-button { width: 100%; max-width: 22rem; }
 .paypal-button[hidden] { display: none; }
+.donate-privacy { margin: 2rem auto 0; max-width: 40rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); line-height: 1.6; text-align: center; }
+.donate-privacy i { color: var(--color-accent); margin-right: 0.35rem; }
+.donate-privacy a { color: #fff; text-decoration: underline; font-weight: 600; }
