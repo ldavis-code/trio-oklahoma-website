@@ -812,3 +812,4 @@ ul { list-style: none; padding: 0; margin: 0; }
 .meet-info [hidden] { display: none; }
 .meet-info .meet-id { color: var(--color-muted); font-weight: 500; }
 .meeting-card .meeting-when + .meeting-when { margin-top: 0.5rem; }
+.meet-info .meet-id a { color: var(--color-secondary); text-decoration: underline; }
