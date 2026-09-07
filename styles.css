@@ -782,3 +782,4 @@ ul { list-style: none; padding: 0; margin: 0; }
 .forms-pay h3 { font-family: var(--font-serif); font-size: 1.6rem; margin: 0.75rem 0 0.5rem; }
 .forms-pay p { color: var(--color-muted); max-width: 32rem; margin: 0 auto; line-height: 1.6; }
 .forms-pay .join-fine-print { margin: 0; }
+.legend-note { margin-left: auto; font-size: 0.75rem; font-weight: 600; color: var(--color-muted-light); text-transform: uppercase; letter-spacing: 0.05em; }

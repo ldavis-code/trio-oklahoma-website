@@ -38,7 +38,7 @@ Add these questions, in this order. Mark each one Required unless noted.
 | 11 | Transplant date | Date | |
 | 12 | Transplant hospital | Text | |
 | 13 | Organ(s) transplanted | Text | Optional |
-| 14 | Anything you would like us to know? | Text, long answer | Optional |
+| 14 | Comments: anything you would like us to know? | Text, long answer | **Not required.** Leave the Required toggle off |
 
 Then open the **...** menu (top right) → **Settings**:
 
